@@ -9,6 +9,7 @@ import MenuPage from './pages/checkout/MenuPage';
 import NotFoundPage from './pages/error/ErrorPage';
 import reportWebVitals from './reportWebVitals';
 import HomePage from './pages/checkout/HomePage';
+import ServicePage from './pages/checkout/ServicePage';
 
 const router = createBrowserRouter([
   {
@@ -29,8 +30,8 @@ const router = createBrowserRouter([
     element: <CheckoutPage />,
   },
   {
-    path: '/finish',
-    element: <div>Finish</div>,
+    path: '/service/:serviceId',
+    element: <ServicePage />,
   },
 ]);
 

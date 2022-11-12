@@ -45,6 +45,7 @@ const HomePage = () => {
       resp.data.msg.serviceTabs.forEach((tab) => {
         tab.quickSales.forEach((qs) => {
           newServices[qs.ean].tabName = tab.name;
+          newServices[qs.ean].image = qs.image;
         });
       });
       setSettings({

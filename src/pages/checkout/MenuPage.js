@@ -15,7 +15,6 @@ import GlobalAlert from '../../components/GlobalAlert';
 import MenuService from '../../components/MenuService';
 import { calculateCart } from '../../utils';
 import { useSettings, useCartItems } from '../../store/MainStoreZustand';
-import SelectedServiceDialog from '../../components/SelectedServiceDialog';
 
 const MenuPage = () => {
   const navigate = useNavigate();
@@ -60,7 +59,6 @@ const MenuPage = () => {
         )}
       </Container>
       <BottomBar />
-      <SelectedServiceDialog />
       <GlobalAlert />
     </>
   );
