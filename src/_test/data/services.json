@@ -1,0 +1,138 @@
+{
+  "1": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 1,
+    "price": "800.00",
+    "name": "Masáž celého těla, hlavy a obličeje ",
+    "tabName": "Klasické masáže"
+  },
+  "2": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 1,
+    "price": "500.00",
+    "name": "Masáž celého těla ",
+    "tabName": "Klasické masáže"
+  },
+  "3": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 1,
+    "price": "200.00",
+    "name": "Záda + šíje ",
+    "tabName": "Klasické masáže"
+  },
+  "4": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 1,
+    "price": "200.00",
+    "name": "Klasické masáže dolní končetiny ",
+    "tabName": "Klasické masáže"
+  },
+  "5": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 1,
+    "price": "100.00",
+    "name": "Horní končetiny",
+    "tabName": "Klasické masáže"
+  },
+  "6": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 2,
+    "price": "500.00",
+    "name": "Lymfatické masáže dolní končetiny",
+    "tabName": "Lymfatické masáže"
+  },
+  "7": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 2,
+    "price": "150.00",
+    "name": "Obličej + krk",
+    "tabName": "Lymfatické masáže"
+  },
+  "8": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 3,
+    "price": "200.00",
+    "name": "Indická masáž hlavy a obličeje ",
+    "tabName": "Speciální masáže"
+  },
+  "9": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 3,
+    "price": "500.00",
+    "name": "Medová masáž zad a šíje ",
+    "tabName": "Speciální masáže"
+  },
+  "10": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 3,
+    "price": "500.00",
+    "name": "Čokoládová masáž zad a šíje ",
+    "tabName": "Speciální masáže"
+  },
+  "11": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 3,
+    "price": "600.00",
+    "name": "Havajská masáž celková",
+    "tabName": "Speciální masáže"
+  },
+  "12": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 3,
+    "price": "500.00",
+    "name": "Těhotenská masáž ",
+    "tabName": "Speciální masáže"
+  },
+  "13": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 3,
+    "price": "700.00",
+    "name": "Čínská bodová masáž zad, šíje a nohou ",
+    "tabName": "Speciální masáže"
+  },
+  "14": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 3,
+    "price": "500.00",
+    "name": "Thajská masáž chodidel",
+    "tabName": "Speciální masáže"
+  },
+  "15": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 3,
+    "price": "800.00",
+    "name": "Masáž horkými kameny",
+    "tabName": "Speciální masáže"
+  },
+  "16": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 3,
+    "price": "900.00",
+    "name": "Bambusové masáže",
+    "tabName": "Speciální masáže"
+  },
+  "17": {
+    "unit": "pcs",
+    "amount": 1,
+    "group": 3,
+    "price": "200.00",
+    "name": "Dětské masáže ",
+    "tabName": "Speciální masáže"
+  }
+}

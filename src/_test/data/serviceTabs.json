@@ -1,0 +1,136 @@
+[
+  {
+    "name": "Klasické masáže",
+    "quickSales": [
+      {
+        "ean": "1",
+        "bg": "334C60",
+        "image": "vcxxkibhjum9k5xszlbh",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "2",
+        "bg": "334C60",
+        "image": "h3ris3o2vdeq95zye3yx",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "3",
+        "bg": "334C60",
+        "image": "tvvemerqrt6ynir9zenn",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "4",
+        "bg": "334C60",
+        "image": "gplgjrfs9sn0m7fvnjji",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "5",
+        "bg": "334C60",
+        "image": "us4dwtn20mycs1py2pzq",
+        "qsscale": false,
+        "enabled": true
+      }
+    ]
+  },
+  {
+    "name": "Lymfatické masáže",
+    "quickSales": [
+      {
+        "ean": "6",
+        "bg": "334C60",
+        "image": "dnn5cdllptixxmnq21hk",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "7",
+        "bg": "334C60",
+        "image": "fal2obalygaszojtkfus",
+        "qsscale": false,
+        "enabled": true
+      }
+    ]
+  },
+  {
+    "name": "Speciální masáže",
+    "quickSales": [
+      {
+        "ean": "8",
+        "bg": "334C60",
+        "image": "ledz6tax3fwolzrwzb5r",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "9",
+        "bg": "334C60",
+        "image": "pp0pkd36f3fg0ico1wc9",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "10",
+        "bg": "334C60",
+        "image": "peekvz5u6r5bjuu0krgi",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "11",
+        "bg": "334C60",
+        "image": "rbicoqa8k0dkancqirdv",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "12",
+        "bg": "334C60",
+        "image": "ljpftcpupu0wqwsg4qfc",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "13",
+        "bg": "334C60",
+        "image": "ybg0bbuzkuteznlq3rfj",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "14",
+        "bg": "334C60",
+        "image": "sn7ulbolrihhsjr27qap",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "15",
+        "bg": "334C60",
+        "image": "ipuftmlfdktmvjjxbdma",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "16",
+        "bg": "334C60",
+        "image": "ede61lfzeglpjvrsscot",
+        "qsscale": false,
+        "enabled": true
+      },
+      {
+        "ean": "17",
+        "bg": "334C60",
+        "image": "udrwrs523uruyb1lbh5p",
+        "qsscale": false,
+        "enabled": true
+      }
+    ]
+  }
+]

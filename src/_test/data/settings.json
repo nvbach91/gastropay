@@ -1,0 +1,7 @@
+{
+    "timeCliff": 45,
+    "nDatesToRender": 14,
+    "startTime": "10:00",
+    "endTime": "18:00",
+    "isEnabledWeekend": false
+}
