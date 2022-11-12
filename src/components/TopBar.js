@@ -16,6 +16,11 @@ const backNavigations = {
   '/checkout': '/menu',
 };
 
+const topBarTitles = {
+  '/checkout': 'Checkout',
+  '/menu': '',
+};
+
 const TopBar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -32,13 +37,12 @@ const TopBar = () => {
   return (
     <AppBar color="default" elevation={0} sx={{ backgroundColor: '#fff' }}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
-        {backNavigations[pathname] ? (
+        {backNavigations[pathname] && (
           <IconButton onClick={() => navigate(backNavigations[pathname])}>
             <ArrowBackIcon />
           </IconButton>
-        ) : (
-          <Typography variant="h6">{settings.business ? settings.business.name : packageJson.app.name}</Typography>
         )}
+        <Typography variant="h6">{topBarTitles[pathname] || (settings.business ? settings.business.name : packageJson.app.name)}</Typography>
         <IconButton onClick={handleNavigateToCheckout}>
           <Badge badgeContent={cartInfo.totalQuantity} color="secondary">
             <ShoppingBasketIcon />

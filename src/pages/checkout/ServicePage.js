@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,18 +11,42 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Chip from '@mui/material/Chip';
+import Slider from '@mui/material/Slider';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IMAGE_API_BASE_URL } from '../../utils';
-import { useSettings, useAddCartItem } from '../../store/MainStoreZustand';
+import { useSettings, useAddCartItem, useSelectedServiceQuantity, useSetSelectedServiceQuantity } from '../../store/MainStoreZustand';
 import { SlideTransition } from '../../components/Transitions';
 
+const ServiceQuantitySlider = () => {
+  const [selectedServiceQuantity, setSelectedServiceQuantity] = [useSelectedServiceQuantity(), useSetSelectedServiceQuantity()];
+  
+  useEffect(() => {
+    setSelectedServiceQuantity(1);
+  }, [setSelectedServiceQuantity]);
+
+  return (
+    <Box sx={{ position: 'fixed', bottom: 80, width: 200, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Slider
+        value={selectedServiceQuantity}
+        onChange={(e, v) => setSelectedServiceQuantity(v)}
+        defaultValue={1}
+        valueLabelDisplay="on"
+        step={1}
+        min={1}
+        max={10}
+      />
+      <Typography gutterBottom>Quantity: {selectedServiceQuantity}</Typography>
+    </Box>
+  )
+}
 const ServicePage = () => {
   const { serviceId } = useParams();
   const navigate = useNavigate();
   const { services, currency } = useSettings();
   const addCartItem = useAddCartItem();
   const service = services[serviceId];
+  const [selectedServiceQuantity] = [useSelectedServiceQuantity()];
   const [isModalOpen, setIsModalOpen] = useState(true);
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -30,10 +54,10 @@ const ServicePage = () => {
   const transitionProps = {
     onExited: () => {
       if (!isModalOpen) {
-       navigate('/menu');
+        navigate('/menu');
       }
     }
-  }
+  };
   return (
     <Dialog fullScreen open={isModalOpen} onClose={handleCloseModal} TransitionComponent={SlideTransition} TransitionProps={transitionProps}>
       <AppBar color="default" elevation={0} sx={{ backgroundColor: '#fff' }}>
@@ -58,18 +82,17 @@ const ServicePage = () => {
           <Typography variant="body2">{service.description || ''}</Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: 'center' }}>
+          <ServiceQuantitySlider />
           <Button
-            sx={{ minWidth: 300, position: 'fixed', bottom: 20, pt: 1, pb: 1, borderRadius: 20 }}
+            sx={{ width: 300, position: 'fixed', bottom: 20, py: 2, borderRadius: 20 }}
             disableElevation
             variant="contained"
             size="small"
             onClick={() => {
-              addCartItem({ ...service }, 1);
-              setTimeout(() => {
-                navigate('/menu');
-              }, 300)
+              addCartItem({ ...service, ean: serviceId }, selectedServiceQuantity);
+              setTimeout(handleCloseModal, 300)
             }}
-          >Add to basket {service.price} {currency.symbol}</Button>
+          >Add to basket {selectedServiceQuantity * service.price} {currency.symbol}</Button>
         </CardActions>
       </Card>
     </Dialog>

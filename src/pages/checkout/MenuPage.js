@@ -23,7 +23,7 @@ const MenuPage = () => {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const renderTabContent = (quickSales, index) => {
     return (
-      <Paper elevation={0} key={index} sx={{ backgroundColor: '#f1f1f1' }}>
+      <Paper elevation={0} key={index} sx={{ backgroundColor: '#f5f5f5' }}>
         {quickSales.map((qs, index) => <MenuService key={index} quickSale={qs} />)}
       </Paper>
     );
