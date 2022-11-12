@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-export const isDev = window.location.hostname === 'localhost' || window.location.hostname.includes('10.0.0.180');
+export const isDev = window.location.hostname === 'localhost';// || window.location.hostname.includes('10.0.0.180');
 
 export const urlParams = {};
 const params = new URLSearchParams(window.location.search);
@@ -10,7 +10,7 @@ for (const key of keys) {
 }
 
 export const IMAGE_API_BASE_URL = 'https://res.cloudinary.com/gokasacz/image/upload/';
-export const API_BASE_URL = !isDev ? 'https://trafika.vcap.me:3000' : 'https://api.gokasa.cz';
+export const API_BASE_URL = isDev ? 'https://trafika.vcap.me:3000' : 'https://api.gokasa.cz';
 
 export const axios = Axios.create({ baseURL: API_BASE_URL });
 
