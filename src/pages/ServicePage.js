@@ -15,7 +15,7 @@ import Slider from '@mui/material/Slider';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IMAGE_API_BASE_URL } from '../utils';
-import { useSettings, useAddCartItem, useSelectedServiceQuantity, useSetSelectedServiceQuantity } from '../store/MainStoreZustand';
+import { useSettings, useAddCartItem, useSelectedServiceQuantity, useSetSelectedServiceQuantity, useCartItems } from '../store/MainStoreZustand';
 import { SlideTransition } from '../components/Transitions';
 
 const ServiceQuantityControls = ({ serviceId, handleCloseModal }) => {
@@ -44,10 +44,8 @@ const ServiceQuantityControls = ({ serviceId, handleCloseModal }) => {
       </Box>
 
       <Button
-        sx={{ width: 300, position: 'fixed', bottom: 20, py: 2, borderRadius: 20 }}
-        disableElevation
+        sx={{ width: 300, position: 'fixed', bottom: 20, py: 1, borderRadius: 20 }}
         variant="contained"
-        size="small"
         onClick={() => {
           addCartItem({ ...service, ean: serviceId }, selectedServiceQuantity);
           setTimeout(handleCloseModal, 300)
@@ -63,6 +61,9 @@ const ServicePage = () => {
   const { services, currency } = useSettings();
   const service = services[serviceId];
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const cartItems = useCartItems();
+  const addedItem = cartItems.find((ci) => ci.ean === serviceId);
+  const addedItemQuantity = addedItem ? addedItem.quantity : 0;
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -89,6 +90,7 @@ const ServicePage = () => {
         <CardContent>
           <Typography gutterBottom variant="h6">{service.name}</Typography>
           <Typography variant="body2">{service.description || ''}</Typography>
+          {addedItemQuantity ? <Typography color="success.main">You have added {addedItemQuantity} of this item in the basket</Typography> : <></>}
         </CardContent>
         <CardActions sx={{ justifyContent: 'center' }}>
           <ServiceQuantityControls serviceId={serviceId} handleCloseModal={handleCloseModal} />
