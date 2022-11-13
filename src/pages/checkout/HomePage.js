@@ -11,6 +11,7 @@ import { useSettings, useSetSettings } from '../../store/MainStoreZustand';
 import TopBar from '../../components/TopBar';
 import BottomBar from '../../components/BottomBar';
 import { axios } from '../../utils';
+import { nanoid } from 'nanoid';
 
 
 const HomePage = () => {
@@ -43,7 +44,9 @@ const HomePage = () => {
         newServices[ean].price = newServices[ean].price.replace(/\.00$/, '');
       });
       resp.data.msg.serviceTabs.forEach((tab) => {
+        tab.id = nanoid();
         tab.quickSales.forEach((qs) => {
+          qs.id = nanoid();
           newServices[qs.ean].tabName = tab.name;
           newServices[qs.ean].image = qs.image;
         });

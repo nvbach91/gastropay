@@ -18,35 +18,50 @@ import { IMAGE_API_BASE_URL } from '../../utils';
 import { useSettings, useAddCartItem, useSelectedServiceQuantity, useSetSelectedServiceQuantity } from '../../store/MainStoreZustand';
 import { SlideTransition } from '../../components/Transitions';
 
-const ServiceQuantitySlider = () => {
+const ServiceQuantityControls = ({ serviceId, handleCloseModal }) => {
+  const { services, currency } = useSettings();
+  const service = services[serviceId];
+  const addCartItem = useAddCartItem();
   const [selectedServiceQuantity, setSelectedServiceQuantity] = [useSelectedServiceQuantity(), useSetSelectedServiceQuantity()];
-  
+
   useEffect(() => {
     setSelectedServiceQuantity(1);
   }, [setSelectedServiceQuantity]);
 
   return (
-    <Box sx={{ position: 'fixed', bottom: 80, width: 200, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Slider
-        value={selectedServiceQuantity}
-        onChange={(e, v) => setSelectedServiceQuantity(v)}
-        defaultValue={1}
-        valueLabelDisplay="on"
-        step={1}
-        min={1}
-        max={10}
-      />
-      <Typography gutterBottom>Quantity: {selectedServiceQuantity}</Typography>
-    </Box>
+    <>
+      <Box sx={{ position: 'fixed', bottom: 80, width: 200, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Slider
+          value={selectedServiceQuantity}
+          onChange={(e, v) => setSelectedServiceQuantity(v)}
+          defaultValue={1}
+          valueLabelDisplay="on"
+          step={1}
+          min={1}
+          max={10}
+        />
+        <Typography gutterBottom>Quantity: {selectedServiceQuantity}</Typography>
+      </Box>
+
+      <Button
+        sx={{ width: 300, position: 'fixed', bottom: 20, py: 2, borderRadius: 20 }}
+        disableElevation
+        variant="contained"
+        size="small"
+        onClick={() => {
+          addCartItem({ ...service, ean: serviceId }, selectedServiceQuantity);
+          setTimeout(handleCloseModal, 300)
+        }}
+      >Add to basket {selectedServiceQuantity * service.price} {currency.symbol}</Button>
+    </>
   )
-}
+};
+
 const ServicePage = () => {
   const { serviceId } = useParams();
   const navigate = useNavigate();
   const { services, currency } = useSettings();
-  const addCartItem = useAddCartItem();
   const service = services[serviceId];
-  const [selectedServiceQuantity] = [useSelectedServiceQuantity()];
   const [isModalOpen, setIsModalOpen] = useState(true);
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -82,17 +97,7 @@ const ServicePage = () => {
           <Typography variant="body2">{service.description || ''}</Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: 'center' }}>
-          <ServiceQuantitySlider />
-          <Button
-            sx={{ width: 300, position: 'fixed', bottom: 20, py: 2, borderRadius: 20 }}
-            disableElevation
-            variant="contained"
-            size="small"
-            onClick={() => {
-              addCartItem({ ...service, ean: serviceId }, selectedServiceQuantity);
-              setTimeout(handleCloseModal, 300)
-            }}
-          >Add to basket {selectedServiceQuantity * service.price} {currency.symbol}</Button>
+          <ServiceQuantityControls serviceId={serviceId} handleCloseModal={handleCloseModal} />
         </CardActions>
       </Card>
     </Dialog>

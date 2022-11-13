@@ -16,34 +16,44 @@ import MenuService from '../../components/MenuService';
 import { calculateCart } from '../../utils';
 import { useSettings, useCartItems } from '../../store/MainStoreZustand';
 
+const TabContent = ({ quickSales }) => {
+  return (
+    <Paper elevation={0} sx={{ backgroundColor: '#f5f5f5' }}>
+      {quickSales.map((qs) => <MenuService key={qs.id} quickSale={qs} />)}
+    </Paper>
+  );
+};
+
+const ServiceTabs = () => {
+  const { serviceTabs } = useSettings();
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+  return (
+    <>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 1 }}>
+        <Tabs value={selectedTabIndex} onChange={(e, index) => setSelectedTabIndex(index)} variant="scrollable">
+          {serviceTabs.map((tab) => {
+            const { name } = tab;
+            return <Tab wrapped key={tab.id} label={name} sx={{ width: 140 }} />;
+          })}
+        </Tabs>
+      </Box>
+      <SwipeableViews axis="x" index={selectedTabIndex} onChangeIndex={(index) => setSelectedTabIndex(index)}>
+        {serviceTabs.map((tab) => <TabContent key={tab.id} quickSales={tab.quickSales} />)}
+      </SwipeableViews>
+    </>
+  );
+};
+
 const MenuPage = () => {
   const navigate = useNavigate();
-  const { serviceTabs, currency } = useSettings();
+  const { currency } = useSettings();
   const cartItems = useCartItems();
-  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
-  const renderTabContent = (quickSales, index) => {
-    return (
-      <Paper elevation={0} key={index} sx={{ backgroundColor: '#f5f5f5' }}>
-        {quickSales.map((qs, index) => <MenuService key={index} quickSale={qs} />)}
-      </Paper>
-    );
-  };
   const cartInfo = calculateCart(cartItems);
   return (
     <>
       <TopBar />
       <Container component="main" maxWidth="sm" sx={{ mb: 4, pt: 8, justifyContent: 'center' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 1 }}>
-          <Tabs value={selectedTabIndex} onChange={(e, index) => setSelectedTabIndex(index)} variant="scrollable">
-            {serviceTabs.map((tab, index) => {
-              const { name } = tab;
-              return <Tab wrapped key={index} label={name} sx={{ width: 140 }} />;
-            })}
-          </Tabs>
-        </Box>
-        <SwipeableViews axis="x" index={selectedTabIndex} onChangeIndex={(index) => setSelectedTabIndex(index)}>
-          {serviceTabs.map((tab, index) => renderTabContent(tab.quickSales, index))}
-        </SwipeableViews>
+        <ServiceTabs />
         {cartInfo.totalQuantity < 1 ? <></> : (
           <Box sx={{ position: 'fixed', width: '100%', left: 0, bottom: 20, justifyContent: 'center', display: 'flex' }}>
             <Button sx={{ textTransform: 'unset', borderRadius: 10, minWidth: 300, pl: 1, pt: 1, pb: 1, justifyContent: 'space-between' }} variant="contained" onClick={() => navigate('/checkout')}>

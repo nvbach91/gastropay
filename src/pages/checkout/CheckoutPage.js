@@ -20,8 +20,7 @@ import { useCartItems, useSettings, useRemoveCartItem, useDecrementCartItem, use
 import { calculateCart } from '../../utils';
 import PaymentGatewayDialog from '../../components/PaymentGatewayDialog';
 
-const CheckoutPage = () => {
-  const [isPaying, setIsPaying] = useState(false);
+const CheckoutItemList = () => {
   const { services, currency } = useSettings();
   const navigate = useNavigate();
   const cartItems = useCartItems();
@@ -41,6 +40,47 @@ const CheckoutPage = () => {
     setFocusedCartItemId('');
   }, [setFocusedCartItemId])
   return (
+    <List disablePadding>
+      {cartItems.map(({ id, ean, price, quantity, notes }) => {
+        const { name } = services[ean];
+        return (
+          <ListItem key={id} sx={{ py: 1, px: 0, flexDirection: 'column' }} onClick={() => toggleFocusedCartItem(id)}>
+            <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+              <ListItemText primary={<Typography>{name}</Typography>} secondary={notes ? notes.map((note) => <Typography>{note}</Typography>) : <></>} />
+              <Typography variant="body2" sx={{ minWidth: 70, textAlign: 'right' }}>{quantity} &times; {price}</Typography>
+            </Box>
+            {focusedCartItemId === id && (
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }} onClick={(e) => e.stopPropagation()}>
+                <IconButton onClick={() => removeCartItem(id, navigate)}>
+                  <DeleteIcon />
+                </IconButton>
+                <IconButton onClick={() => decrementCartItem(id, navigate)}>
+                  <RemoveIcon />
+                </IconButton>
+                <IconButton onClick={() => incrementCartItem(id, navigate)}>
+                  <AddIcon />
+                </IconButton>
+              </Box>
+            )}
+          </ListItem>
+        )
+      })}
+      <Divider />
+      <ListItem sx={{ py: 1, px: 0 }}>
+        <ListItemText primary="Total" />
+        <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+          {cartInfo.totalPrice} {currency.symbol}
+        </Typography>
+      </ListItem>
+    </List>
+  );
+};
+
+const CheckoutPage = () => {
+  const [isPaying, setIsPaying] = useState(false);
+  const cartItems = useCartItems();
+  const cartInfo = calculateCart(cartItems);
+  return (
     <>
       <TopBar />
       <Container component="main" maxWidth="sm" sx={{ mb: 4, pt: 6 }}>
@@ -50,39 +90,7 @@ const CheckoutPage = () => {
             <Typography variant="h6">{cartInfo.totalQuantity} item{cartInfo.totalQuantity !== 1 ? 's' : ''}</Typography>
           </Box>
           <Divider />
-          <List disablePadding>
-            {cartItems.map(({ id, ean, price, quantity, notes }) => {
-              const { name } = services[ean];
-              return (
-                <ListItem key={id} sx={{ py: 1, px: 0, flexDirection: 'column' }} onClick={() => toggleFocusedCartItem(id)}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                    <ListItemText primary={<Typography>{name}</Typography>} secondary={notes ? notes.map((note) => <Typography>{note}</Typography>) : <></>} />
-                    <Typography variant="body2" sx={{ minWidth: 70, textAlign: 'right' }}>{quantity} &times; {price}</Typography>
-                  </Box>
-                  {focusedCartItemId === id && (
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }} onClick={(e) => e.stopPropagation()}>
-                      <IconButton onClick={() => removeCartItem(id, navigate)}>
-                        <DeleteIcon />
-                      </IconButton>
-                      <IconButton onClick={() => decrementCartItem(id, navigate)}>
-                        <RemoveIcon />
-                      </IconButton>
-                      <IconButton onClick={() => incrementCartItem(id, navigate)}>
-                        <AddIcon />
-                      </IconButton>
-                    </Box>
-                  )}
-                </ListItem>
-              )
-            })}
-            <Divider />
-            <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Total" />
-              <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
-                {cartInfo.totalPrice} {currency.symbol}
-              </Typography>
-            </ListItem>
-          </List>
+          <CheckoutItemList />
           <Divider />
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
             <Typography variant="h6" gutterBottom>Payment</Typography>

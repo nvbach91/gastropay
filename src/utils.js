@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-export const isDev = window.location.hostname === 'localhost';// || window.location.hostname.includes('10.0.0.180');
+export const isDev = false;//window.location.hostname === 'localhost';// || window.location.hostname.includes('10.0.0.180');
 
 export const urlParams = {};
 const params = new URLSearchParams(window.location.search);
