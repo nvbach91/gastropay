@@ -2,6 +2,8 @@ import create from 'zustand';
 import { nanoid } from 'nanoid';
 
 const useStore = create((set) => ({
+  theme: '',              setTheme: (theme) => set(() => ({ theme })),
+  drawerOpen: false,      setDrawerOpen: (drawerOpen) => set(() => ({ drawerOpen })),
   alertMessage: '',       setAlertMessage: (msg) => set(() => ({ alertMessage: msg })),
   settings: {},           setSettings: (data) => set(() => ({ settings: data })),
   selectedService: null,  setSelectedService: (data) => set(() =>  ({ selectedService: data })),
@@ -47,6 +49,10 @@ const useStore = create((set) => ({
                           }),
 }));
 
+export const useTheme = () => useStore((state) => state.theme);
+export const useSetTheme = () => useStore((state) => state.setTheme);
+export const useDrawerOpen = () => useStore((state) => state.drawerOpen);
+export const useSetDrawerOpen = () => useStore((state) => state.setDrawerOpen);
 export const useAlertMessage = () => useStore((state) => state.alertMessage);
 export const useSetAlertMessage = () => useStore((state) => state.setAlertMessage);
 export const useSettings = () => useStore((state) => state.settings);

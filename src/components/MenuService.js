@@ -21,7 +21,7 @@ const MenuService = ({ quickSale }) => {
           {services[ean].name}
         </Typography>
       </CardContent>
-      <Button sx={{ textTransform: 'unset', minWidth: 100, borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}>
+      <Button sx={{ textTransform: 'unset', minWidth: 80, borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}>
         {services[ean].price} {currency.symbol}
       </Button>
     </Card>

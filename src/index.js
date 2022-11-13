@@ -2,14 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import CssBaseline from '@mui/material/CssBaseline';
 
 import './_assets/css/index.css';
-import CheckoutPage from './pages/checkout/CheckoutPage';
-import MenuPage from './pages/checkout/MenuPage';
-import NotFoundPage from './pages/error/ErrorPage';
+import CheckoutPage from './pages/CheckoutPage';
+import MenuPage from './pages/MenuPage';
+import NotFoundPage from './pages/ErrorPage';
 import reportWebVitals from './reportWebVitals';
-import HomePage from './pages/checkout/HomePage';
-import ServicePage from './pages/checkout/ServicePage';
+import HomePage from './pages/HomePage';
+import ServicePage from './pages/ServicePage';
+import AboutPage from './pages/AboutPage';
+import SettingsPage from './pages/SettingsPage';
 
 const router = createBrowserRouter([
   {
@@ -33,16 +37,36 @@ const router = createBrowserRouter([
     path: '/service/:serviceId',
     element: <ServicePage />,
   },
+  {
+    path: '/settings',
+    element: <SettingsPage />,
+  },
+  {
+    path: '/about',
+    element: <AboutPage />,
+  },
 ]);
 
-const theme = createTheme();
+
+const App = () => {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const theme = React.useMemo(() => {
+    const palette = {
+      mode: prefersDarkMode ? 'light' : 'light',
+    };
+    return createTheme({ palette });
+  }, [prefersDarkMode]);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  );
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <ThemeProvider theme={theme}>
-    <RouterProvider router={router} />
-  </ThemeProvider>
-);
+root.render(<App />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

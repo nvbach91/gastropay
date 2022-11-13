@@ -14,11 +14,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useNavigate } from 'react-router-dom';
-import TopBar from '../../components/TopBar';
-import BottomBar from '../../components/BottomBar';
-import { useCartItems, useSettings, useRemoveCartItem, useDecrementCartItem, useIncrementCartItem, useFocusedCartItemId, useSetFocusedCartItemId } from '../../store/MainStoreZustand';
-import { calculateCart } from '../../utils';
-import PaymentGatewayDialog from '../../components/PaymentGatewayDialog';
+import TopBar from '../components/TopBar';
+import BottomBar from '../components/BottomBar';
+import { useCartItems, useSettings, useRemoveCartItem, useDecrementCartItem, useIncrementCartItem, useFocusedCartItemId, useSetFocusedCartItemId } from '../store/MainStoreZustand';
+import { calculateCart } from '../utils';
+import PaymentGatewayDialog from '../components/PaymentGatewayDialog';
 
 const CheckoutItemList = () => {
   const { services, currency } = useSettings();

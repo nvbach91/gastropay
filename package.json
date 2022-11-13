@@ -2,7 +2,8 @@
   "name": "gastropay",
   "app": {
     "name": "Gastropay",
-    "www": "gastropay.cz"
+    "www": "gastropay.cz",
+    "provider": "Ethereals United"
   },
   "version": "0.1.0",
   "private": true,

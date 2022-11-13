@@ -7,10 +7,10 @@ import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import { useSettings, useSetSettings } from '../../store/MainStoreZustand';
-import TopBar from '../../components/TopBar';
-import BottomBar from '../../components/BottomBar';
-import { axios } from '../../utils';
+import { useSettings, useSetSettings } from '../store/MainStoreZustand';
+import TopBar from '../components/TopBar';
+import BottomBar from '../components/BottomBar';
+import { axios } from '../utils';
 import { nanoid } from 'nanoid';
 
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,9 +14,9 @@ import Chip from '@mui/material/Chip';
 import Slider from '@mui/material/Slider';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate, useParams } from 'react-router-dom';
-import { IMAGE_API_BASE_URL } from '../../utils';
-import { useSettings, useAddCartItem, useSelectedServiceQuantity, useSetSelectedServiceQuantity } from '../../store/MainStoreZustand';
-import { SlideTransition } from '../../components/Transitions';
+import { IMAGE_API_BASE_URL } from '../utils';
+import { useSettings, useAddCartItem, useSelectedServiceQuantity, useSetSelectedServiceQuantity } from '../store/MainStoreZustand';
+import { SlideTransition } from '../components/Transitions';
 
 const ServiceQuantityControls = ({ serviceId, handleCloseModal }) => {
   const { services, currency } = useSettings();
@@ -75,12 +75,10 @@ const ServicePage = () => {
   };
   return (
     <Dialog fullScreen open={isModalOpen} onClose={handleCloseModal} TransitionComponent={SlideTransition} TransitionProps={transitionProps}>
-      <AppBar color="default" elevation={0} sx={{ backgroundColor: '#fff' }}>
+      <AppBar color="default" elevation={0}>
         <Toolbar>
-          <IconButton onClick={handleCloseModal}>
-            <ArrowBackIcon />
-          </IconButton>
-          <Typography noWrap variant="h6">{service.name}</Typography>
+          <IconButton onClick={handleCloseModal}><ArrowBackIcon /></IconButton>
+          {/* <Typography noWrap variant="h6">{service.name}</Typography> */}
         </Toolbar>
       </AppBar>
       <Card elevation={0} sx={{ flexGrow: 1 }}>
@@ -89,11 +87,7 @@ const ServicePage = () => {
           <Chip sx={{ fontSize: 20, position: 'absolute', bottom: 10, right: 10 }} label={`${service.price} ${currency.symbol}`} color="primary" />
         </Box>
         <CardContent>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Typography gutterBottom variant="body1">
-              {service.name}
-            </Typography>
-          </Box>
+          <Typography gutterBottom variant="h6">{service.name}</Typography>
           <Typography variant="body2">{service.description || ''}</Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: 'center' }}>

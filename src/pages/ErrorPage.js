@@ -1,23 +1,19 @@
-import { AppBar, Container, Toolbar, Typography } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Container from '@mui/material/Container';
+import Toolbar from '@mui/material/Typography';
+import Typography from '@mui/material/Typography';
 import { useRouteError } from 'react-router-dom';
+import BottomBar from '../components/BottomBar';
 
-export default function ErrorPage() {
+const ErrorPage = () => {
   const error = useRouteError();
   console.error(error);
 
   return (
     <>
-      <AppBar position="absolute" color="default" elevation={0}
-        sx={{
-          backgroundColor: '#fff',
-          position: 'relative',
-          borderBottom: (t) => `1px solid ${t.palette.divider}`,
-        }}
-      >
+      <AppBar color="default" elevation={0}>
         <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Error
-          </Typography>
+          <Typography variant="h6" color="inherit">Error</Typography>
         </Toolbar>
       </AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4, pt: 8 }}>
@@ -25,6 +21,9 @@ export default function ErrorPage() {
         <Typography variant="body1" gutterBottom>Sorry, an unexpected error has occurred.</Typography>
         <Typography variant="body1" gutterBottom>{error.statusText || error.message}</Typography>
       </Container>
+      <BottomBar />
     </>
   );
 };
+
+export default ErrorPage;

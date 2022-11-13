@@ -3,18 +3,16 @@ import Dialog from '@mui/material/Dialog';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { SlideTransition } from './Transitions';
-import { Typography } from '@mui/material';
 
 const PaymentGatewayDialog = ({ onDialogClose }) => {
   return (
     <Dialog open={true} fullScreen onClose={onDialogClose} TransitionComponent={SlideTransition}>
-      <AppBar color="default" elevation={0} sx={{ backgroundColor: '#fff' }}>
+      <AppBar color="default" elevation={0}>
         <Toolbar>
-          <IconButton onClick={onDialogClose}>
-            <ArrowBackIcon />
-          </IconButton>
+          <IconButton onClick={onDialogClose}><ArrowBackIcon /></IconButton>
           <Typography noWrap variant="h6">Payment</Typography>
         </Toolbar>
       </AppBar>

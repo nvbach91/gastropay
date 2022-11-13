@@ -9,16 +9,17 @@ import Paper from '@mui/material/Paper';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { useNavigate } from 'react-router-dom';
 
-import TopBar from '../../components/TopBar';
-import BottomBar from '../../components/BottomBar';
-import GlobalAlert from '../../components/GlobalAlert';
-import MenuService from '../../components/MenuService';
-import { calculateCart } from '../../utils';
-import { useSettings, useCartItems } from '../../store/MainStoreZustand';
+import LeftDrawer from '../components/LeftDrawer';
+import TopBar from '../components/TopBar';
+import BottomBar from '../components/BottomBar';
+import GlobalAlert from '../components/GlobalAlert';
+import MenuService from '../components/MenuService';
+import { calculateCart } from '../utils';
+import { useSettings, useCartItems } from '../store/MainStoreZustand';
 
 const TabContent = ({ quickSales }) => {
   return (
-    <Paper elevation={0} sx={{ backgroundColor: '#f5f5f5' }}>
+    <Paper elevation={0} sx={{ backgroundColor: 'transparent' }}>
       {quickSales.map((qs) => <MenuService key={qs.id} quickSale={qs} />)}
     </Paper>
   );
@@ -33,7 +34,7 @@ const ServiceTabs = () => {
         <Tabs value={selectedTabIndex} onChange={(e, index) => setSelectedTabIndex(index)} variant="scrollable">
           {serviceTabs.map((tab) => {
             const { name } = tab;
-            return <Tab wrapped key={tab.id} label={name} sx={{ width: 140 }} />;
+            return <Tab wrapped key={tab.id} label={name} sx={{ width: 100 }} />;
           })}
         </Tabs>
       </Box>
@@ -51,6 +52,7 @@ const MenuPage = () => {
   const cartInfo = calculateCart(cartItems);
   return (
     <>
+      <LeftDrawer />
       <TopBar />
       <Container component="main" maxWidth="sm" sx={{ mb: 4, pt: 8, justifyContent: 'center' }}>
         <ServiceTabs />
