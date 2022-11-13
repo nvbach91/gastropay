@@ -2,13 +2,14 @@ import create from 'zustand';
 import { nanoid } from 'nanoid';
 
 const useStore = create((set) => ({
-  theme: '',              setTheme: (theme) => set(() => ({ theme })),
+  theme: localStorage.getItem('theme') || '', setTheme: (theme) => set(() => ({ theme })),
   drawerOpen: false,      setDrawerOpen: (drawerOpen) => set(() => ({ drawerOpen })),
-  alertMessage: '',       setAlertMessage: (msg) => set(() => ({ alertMessage: msg })),
-  settings: {},           setSettings: (data) => set(() => ({ settings: data })),
-  selectedService: null,  setSelectedService: (data) => set(() =>  ({ selectedService: data })),
-  selectedServiceQuantity: 1, setSelectedServiceQuantity: (data) => set(() =>  ({ selectedServiceQuantity: data })),
-  focusedCartItemId: '',  setFocusedCartItemId: (data) => set(() =>  ({ focusedCartItemId: data })),
+  alertMessage: '',       setAlertMessage: (alertMessage) => set(() => ({ alertMessage })),
+  settings: {},           setSettings: (settings) => set(() => ({ settings })),
+  selectedServiceTabIndex: 0, setSelectedServiceTabIndex: (selectedServiceTabIndex) => set(() => ({ selectedServiceTabIndex })),
+  selectedService: null,  setSelectedService: (selectedService) => set(() =>  ({ selectedService })),
+  selectedServiceQuantity: 1, setSelectedServiceQuantity: (selectedServiceQuantity) => set(() =>  ({ selectedServiceQuantity })),
+  focusedCartItemId: '',  setFocusedCartItemId: (focusedCartItemId) => set(() =>  ({ focusedCartItemId })),
   cartItems: [],          addCartItem: (item, quantity) => set((state) =>  {
                             const newCartItems = [ ...state.cartItems ];
                             const existingItemIndex = newCartItems.findIndex((i) => i.ean === item.ean);
@@ -57,6 +58,8 @@ export const useAlertMessage = () => useStore((state) => state.alertMessage);
 export const useSetAlertMessage = () => useStore((state) => state.setAlertMessage);
 export const useSettings = () => useStore((state) => state.settings);
 export const useSetSettings = () => useStore((state) => state.setSettings);
+export const useSelectedServiceTabIndex = () => useStore((state) => state.selectedServiceTabIndex);
+export const useSetSelectedServiceTabIndex = () => useStore((state) => state.setSelectedServiceTabIndex);
 export const useSelectedService = () => useStore((state) => state.selectedService);
 export const useSetSelectedService = () => useStore((state) => state.setSelectedService);
 export const useSelectedServiceQuantity = () => useStore((state) => state.selectedServiceQuantity);

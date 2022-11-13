@@ -14,6 +14,7 @@ import ServicePage from './pages/ServicePage';
 import AboutPage from './pages/AboutPage';
 import SettingsPage from './pages/SettingsPage';
 
+import { useTheme } from './store/MainStoreZustand';
 import './_assets/css/index.css';
 
 const router = createBrowserRouter([
@@ -56,15 +57,14 @@ const router = createBrowserRouter([
 
 const App = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const theme = React.useMemo(() => {
-    const palette = {
-      mode: prefersDarkMode ? 'dark' : 'light',
-    };
+  const theme = useTheme();
+  const theTheme = React.useMemo(() => {
+    const palette = theme ? { mode: theme } : { mode: prefersDarkMode ? 'dark' : 'light' };
     return createTheme({ palette });
-  }, [prefersDarkMode]);
+  }, [prefersDarkMode, theme]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theTheme}>
       <CssBaseline />
       <RouterProvider router={router} />
     </ThemeProvider>

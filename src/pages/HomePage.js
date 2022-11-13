@@ -48,7 +48,7 @@ const HomePage = () => {
         tab.quickSales.forEach((qs) => {
           qs.id = nanoid();
           newServices[qs.ean].tabName = tab.name;
-          newServices[qs.ean].image = qs.image;
+          newServices[qs.ean].image = qs.image || newServices[qs.ean].image;
         });
       });
       setSettings({

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
@@ -15,7 +15,7 @@ import BottomBar from '../components/BottomBar';
 import GlobalAlert from '../components/GlobalAlert';
 import MenuService from '../components/MenuService';
 import { calculateCart } from '../utils';
-import { useSettings, useCartItems } from '../store/MainStoreZustand';
+import { useSettings, useCartItems, useSelectedServiceTabIndex, useSetSelectedServiceTabIndex } from '../store/MainStoreZustand';
 
 const TabContent = ({ quickSales }) => {
   return (
@@ -27,18 +27,18 @@ const TabContent = ({ quickSales }) => {
 
 const ServiceTabs = () => {
   const { serviceTabs } = useSettings();
-  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+  const [selectedServiceTabIndex, setSelectedServiceTabIndex] = [useSelectedServiceTabIndex(), useSetSelectedServiceTabIndex()];
   return (
     <>
       <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 1 }}>
-        <Tabs value={selectedTabIndex} onChange={(e, index) => setSelectedTabIndex(index)} variant="scrollable">
+        <Tabs value={selectedServiceTabIndex} onChange={(e, index) => setSelectedServiceTabIndex(index)} variant="scrollable">
           {serviceTabs.map((tab) => {
             const { name } = tab;
             return <Tab wrapped key={tab.id} label={name} sx={{ width: 100 }} />;
           })}
         </Tabs>
       </Box>
-      <SwipeableViews axis="x" index={selectedTabIndex} onChangeIndex={(index) => setSelectedTabIndex(index)}>
+      <SwipeableViews axis="x" index={selectedServiceTabIndex} onChangeIndex={(index) => setSelectedServiceTabIndex(index)}>
         {serviceTabs.map((tab) => <TabContent key={tab.id} quickSales={tab.quickSales} />)}
       </SwipeableViews>
     </>

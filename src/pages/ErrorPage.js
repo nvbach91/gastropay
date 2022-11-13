@@ -13,8 +13,8 @@ const ErrorPage = () => {
       <TopBar />
       <Container component="main" maxWidth="sm" sx={{ mb: 4, pt: 8 }}>
         <Typography variant="h2" gutterBottom>Opps!</Typography>
-        <Typography variant="body1" gutterBottom>Sorry, an unexpected error has occurred.</Typography>
-        <Typography variant="body1" gutterBottom>{error ? (error.statusText || error.message || '') : ''}</Typography>
+        <Typography variant="body1" gutterBottom>Sorry, an unexpected error has occurred. Please scan the code again.</Typography>
+        <Typography variant="body2" gutterBottom>{error ? (error.statusText || error.message || '') : ''}</Typography>
       </Container>
       <BottomBar />
     </>
