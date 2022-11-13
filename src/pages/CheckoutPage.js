@@ -47,7 +47,7 @@ const CheckoutItemList = () => {
           <ListItem key={id} sx={{ py: 1, px: 0, flexDirection: 'column' }} onClick={() => toggleFocusedCartItem(id)}>
             <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
               <ListItemText primary={<Typography>{name}</Typography>} secondary={notes ? notes.map((note) => <Typography>{note}</Typography>) : <></>} />
-              <Typography variant="body2" sx={{ minWidth: 70, textAlign: 'right' }}>{quantity} &times; {price}</Typography>
+              <Typography variant="body2" sx={{ minWidth: 70, textAlign: 'right' }}>{quantity} &times; {price} {currency.symbol}</Typography>
             </Box>
             {focusedCartItemId === id && (
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }} onClick={(e) => e.stopPropagation()}>
