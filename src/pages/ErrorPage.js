@@ -1,9 +1,8 @@
-import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Typography';
 import Typography from '@mui/material/Typography';
 import { useRouteError } from 'react-router-dom';
 import BottomBar from '../components/BottomBar';
+import TopBar from '../components/TopBar';
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -11,15 +10,11 @@ const ErrorPage = () => {
 
   return (
     <>
-      <AppBar color="default" elevation={0}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit">Error</Typography>
-        </Toolbar>
-      </AppBar>
+      <TopBar />
       <Container component="main" maxWidth="sm" sx={{ mb: 4, pt: 8 }}>
         <Typography variant="h2" gutterBottom>Opps!</Typography>
         <Typography variant="body1" gutterBottom>Sorry, an unexpected error has occurred.</Typography>
-        <Typography variant="body1" gutterBottom>{error.statusText || error.message}</Typography>
+        <Typography variant="body1" gutterBottom>{error ? (error.statusText || error.message || '') : ''}</Typography>
       </Container>
       <BottomBar />
     </>
