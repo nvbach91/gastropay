@@ -84,7 +84,7 @@ const ServicePage = () => {
       </AppBar>
       <Card elevation={0} sx={{ flexGrow: 1 }}>
         <Box sx={{ position: 'relative' }}>
-          <CardMedia component="div" sx={{ height: 240 }} image={`${IMAGE_API_BASE_URL}${service.image}`} />
+          <CardMedia component="div" sx={{ height: 240 }} image={service.image ? `${IMAGE_API_BASE_URL}${service.image}` : ''} />
           <Chip sx={{ fontSize: 20, position: 'absolute', bottom: 10, right: 10 }} label={`${service.price} ${currency.symbol}`} color="primary" />
         </Box>
         <CardContent>
