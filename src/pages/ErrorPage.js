@@ -36,7 +36,7 @@ const ErrorPage = () => {
         </Stack>
         {/* <Typography variant="body2" gutterBottom>{error ? (error.statusText || error.message || '') : ''}</Typography> */}
         {/* <Typography>{qrCode}</Typography> */}
-        {isActiveScanner && <QrReader onResult={onScannerRead} constraints={{ facingMode: 'environment' }} />}
+        {isActiveScanner && <QrReader onResult={onScannerRead} constraints={{ facingMode: 'environment' }} style={{ width: '100%' }} />}
       </Container>
       <BottomBar />
     </>
