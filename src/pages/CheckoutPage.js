@@ -9,6 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
@@ -47,7 +48,11 @@ const CheckoutItemList = () => {
           <ListItem key={id} sx={{ py: 1, px: 0, flexDirection: 'column' }} onClick={() => toggleFocusedCartItem(id)}>
             <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
               <ListItemText primary={<Typography>{name}</Typography>} secondary={notes ? notes.map((note) => <Typography>{note}</Typography>) : <></>} />
-              <Typography variant="body2" sx={{ minWidth: 70, textAlign: 'right' }}>{quantity} &times; {price} {currency.symbol}</Typography>
+              <Stack direction="row">
+                <Typography variant="body2" sx={{ minWidth: 30, textAlign: 'right' }}>{quantity}</Typography>
+                <Typography variant="body2" sx={{ minWidth: 20, textAlign: 'center' }}>&times;</Typography>
+                <Typography variant="body2" sx={{ minWidth: 60, textAlign: 'right' }}>{price} {currency.symbol}</Typography>
+              </Stack>
             </Box>
             {focusedCartItemId === id && (
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }} onClick={(e) => e.stopPropagation()}>
