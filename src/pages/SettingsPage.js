@@ -1,7 +1,6 @@
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
 import Paper from '@mui/material/Paper';
 import * as React from 'react';
@@ -26,16 +25,12 @@ const SettingsPage = () => {
       <Container component="main" maxWidth="sm" sx={{ mb: 4, pt: 8, justifyContent: 'center' }}>
         <Typography variant="h6">Settings</Typography>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={theme === 'dark' || (prefersDarkMode && theme !== 'light')}
-                  onChange={handleChangeTheme} />
-              }
-              label="Dark mode"
-            />
-          </FormGroup>
+
+          <Stack direction="row" alignItems="center" justifyContent="space-between">
+            <Typography>Dark mode</Typography>
+            <Switch checked={theme === 'dark' || (prefersDarkMode && theme !== 'light')} onChange={handleChangeTheme} />
+          </Stack>
+
         </Paper>
       </Container>
       <BottomBar />
