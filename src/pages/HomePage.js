@@ -1,27 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Promise from 'bluebird';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import CircularProgress from '@mui/material/CircularProgress';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import { useSettings, useSetSettings } from '../store/MainStoreZustand';
-import TopBar from '../components/TopBar';
-import BottomBar from '../components/BottomBar';
-import { axios } from '../utils';
+import Stack from '@mui/material/Stack';
+import Skeleton from '@mui/material/Skeleton';
 import { nanoid } from 'nanoid';
+import { useSettings, useSetSettings } from '../store/MainStoreZustand';
+import { axios } from '../utils';
+import packageJson from '../../package.json';
 
 
 const HomePage = () => {
-  const [error, setError] = useState('');
   const [settings, setSettings] = [useSettings(), useSetSettings()];
   const { registerId } = useParams();
   const navigate = useNavigate();
-  const handleApiError = (err) => {
-    setError(err.msg || 'API_ERROR');
-  };
   useEffect(() => {
     Promise.delay(0).then(() => {
       if (!/^[0-9a-fA-F]{24}$/.test(registerId)) {
@@ -59,8 +51,12 @@ const HomePage = () => {
         registerId,
         business: resp.data.msg.business,
       });
-    }).catch(handleApiError);
-  }, [setSettings, registerId]);
+      document.title = `${resp.data.msg.business.name} | ${packageJson.app.name}`;
+    }).catch((err) => {
+      // setError(err.msg || 'API_ERROR');
+      navigate('/error');
+    });
+  }, [setSettings, registerId, navigate]);
 
   useEffect(() => {
     if (settings.registerId) {
@@ -69,20 +65,21 @@ const HomePage = () => {
   }, [settings.registerId, navigate])
   return (
     <>
-      <TopBar />
-      <Container component="main" maxWidth="sm" sx={{ mb: 4, pt: 8 }}>
-        {error ? (
-          <Alert severity="error">
-            <AlertTitle>Error</AlertTitle>
-            {error}
-          </Alert>
-        ) : (
-          <Paper elevation={0} sx={{ display: 'flex', justifyContent: 'center', pt: 20, pb: 20 }}>
-            <CircularProgress />
-          </Paper>
-        )}
-      </Container>
-      <BottomBar />
+      <Skeleton variant="rectangle" animation="wave" height={60} />
+      <Stack spacing={1} sx={{ px: 2, py: 2 }} direction="row">
+        <Skeleton variant="rounded" animation="wave" height={60} width={200} />
+        <Skeleton variant="rounded" animation="wave" height={60} width={200} />
+        <Skeleton variant="rounded" animation="wave" height={60} width={200} />
+      </Stack>
+      <Stack spacing={1} sx={{ px: 2 }}>
+        <Skeleton variant="rounded" animation="wave" height={60} />
+        <Skeleton variant="rounded" animation="wave" height={60} />
+        <Skeleton variant="rounded" animation="wave" height={60} />
+        <Skeleton variant="rounded" animation="wave" height={60} />
+        <Skeleton variant="rounded" animation="wave" height={60} />
+        <Skeleton variant="rounded" animation="wave" height={60} />
+        <Skeleton variant="rounded" animation="wave" height={60} />
+      </Stack>
     </>
   );
 };
