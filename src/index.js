@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -6,6 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import CheckoutPage from './pages/CheckoutPage';
+import PaymentPage from './pages/PaymentPage';
 import MenuPage from './pages/MenuPage';
 import ErrorPage from './pages/ErrorPage';
 // import reportWebVitals from './reportWebVitals';
@@ -44,6 +45,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
+    path: '/payment',
+    element: <PaymentPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
     path: '/service/:serviceId',
     element: <ServicePage />,
     errorElement: <ErrorPage />,
@@ -64,7 +70,7 @@ const router = createBrowserRouter([
 const App = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const theme = useTheme();
-  const theTheme = React.useMemo(() => {
+  const theTheme = useMemo(() => {
     const palette = theme ? { mode: theme } : { mode: prefersDarkMode ? 'dark' : 'light' };
     return createTheme({ palette });
   }, [prefersDarkMode, theme]);

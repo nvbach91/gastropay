@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
@@ -19,7 +19,6 @@ import TopBar from '../components/TopBar';
 import BottomBar from '../components/BottomBar';
 import { useCartItems, useSettings, useRemoveCartItem, useDecrementCartItem, useIncrementCartItem, useFocusedCartItemId, useSetFocusedCartItemId } from '../store/MainStoreZustand';
 import { calculateCart } from '../utils';
-import PaymentGatewayDialog from '../components/PaymentGatewayDialog';
 
 const CheckoutItemList = () => {
   const { services, currency } = useSettings();
@@ -82,9 +81,9 @@ const CheckoutItemList = () => {
 };
 
 const CheckoutPage = () => {
-  const [isPaying, setIsPaying] = useState(false);
   const cartItems = useCartItems();
   const cartInfo = calculateCart(cartItems);
+  const navigate = useNavigate();
   return (
     <>
       <TopBar />
@@ -99,10 +98,9 @@ const CheckoutPage = () => {
           <Divider />
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
             <Typography variant="h6" gutterBottom>Payment</Typography>
-            <Button onClick={() => setIsPaying((prev) => !prev)} variant="contained" startIcon={<CreditCardIcon />} size="large">Pay by credit card</Button>
+            <Button onClick={() => navigate('/payment')} variant="contained" startIcon={<CreditCardIcon />} size="large">Pay by credit card</Button>
           </Box>
         </Paper>
-        {isPaying && <PaymentGatewayDialog onDialogClose={() => setIsPaying(false)} />}
         <BottomBar />
       </Container>
     </>

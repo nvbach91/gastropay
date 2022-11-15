@@ -1,4 +1,3 @@
-import React from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
