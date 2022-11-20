@@ -11,8 +11,10 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Chip from '@mui/material/Chip';
-import Slider from '@mui/material/Slider';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IMAGE_API_BASE_URL } from '../utils';
 import { useSettings, useAddCartItem, useSelectedServiceQuantity, useSetSelectedServiceQuantity, useCartItems } from '../store/MainStoreZustand';
@@ -28,19 +30,31 @@ const ServiceQuantityControls = ({ serviceId, handleCloseModal }) => {
     setSelectedServiceQuantity(1);
   }, [setSelectedServiceQuantity]);
 
+  const [minQuantity, maxQuantity] = [1, 99];
+  const handleSetQuantity = (sign) => () => {
+    let newQuantity = selectedServiceQuantity + sign;
+    if (sign === 1 && newQuantity > maxQuantity) {
+      newQuantity = maxQuantity;
+    }
+    if (sign === -1 && newQuantity < minQuantity) {
+      newQuantity = minQuantity;
+    }
+    setSelectedServiceQuantity(newQuantity);
+  };
+
   return (
     <>
       <Box sx={{ position: 'fixed', bottom: 80, width: 200, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Slider
-          value={selectedServiceQuantity}
-          onChange={(e, v) => setSelectedServiceQuantity(v)}
-          defaultValue={1}
-          valueLabelDisplay="on"
-          step={1}
-          min={1}
-          max={10}
-        />
-        <Typography gutterBottom>Quantity: {selectedServiceQuantity}</Typography>
+        <Typography gutterBottom>Quantity</Typography>
+        <ButtonGroup variant="outlined" aria-label="outlined button group">
+          <Button disabled={selectedServiceQuantity === minQuantity} onClick={handleSetQuantity(-1)}>
+            <RemoveIcon />
+          </Button>
+          <Button style={{ minWidth: 50 }}>{selectedServiceQuantity}</Button>
+          <Button disabled={selectedServiceQuantity === maxQuantity} onClick={handleSetQuantity(1)}>
+            <AddIcon />
+          </Button>
+        </ButtonGroup>
       </Box>
 
       <Button
