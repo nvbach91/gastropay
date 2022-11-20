@@ -160,12 +160,12 @@ const TipControl = () => {
             />
           ))}
         </RadioGroup>
-        <Button sx={{ padding: 0 }} onClick={() => { setTipPercentage(currency.symbol); setTipValueDialogOpen(true); }}>
+        <Button sx={{ padding: 0, textTransform: 'none' }} onClick={() => { setTipPercentage(currency.symbol); setTipValueDialogOpen(true); }}>
           <TextField
             type="number"
             value={tipPercentage === currency.symbol ? tipValue : Math.round(cartInfo.totalPrice * tipPercentage)}
             size="small"
-            sx={{ width: 100 }}
+            sx={{ input: { textAlign: 'right' }, width: 100 }}
             InputProps={{
               inputProps: { min: 0 },
               readOnly: true,
